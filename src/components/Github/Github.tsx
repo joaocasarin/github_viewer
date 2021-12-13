@@ -1,52 +1,29 @@
 import React from 'react';
-import { Box, BoxProps, Divider } from '@mui/material';
-import { styled as muiStyled } from '@mui/material/styles';
-import styled from 'styled-components';
+import { Divider, Box, Link } from '@mui/material';
 import { User, UserRepo } from '../../interfaces/interfaces';
+import { Wrapper, Info, BoxStyle } from './Github.styles';
 import Repos from '../Repos/Repos';
 
-const NewBox = muiStyled(Box)<BoxProps>(() => ({
-    width: '100%',
-    height: '325px',
-    display: 'flex',
-    justifyContent: 'space-around'
-}));
-
-const Info = styled.p`
-    font-size: 1rem;
-    font-weight: bold;
-    color: #373737;
-    font-family: 'Fira Sans', sans-serif;
-    padding: 0.5rem;
-`;
-
 const Github = ({ user, repos }: { user: User | undefined; repos: UserRepo[] }) => (
-    <NewBox>
-        <div
-            style={{
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-around',
-                alignItems: 'center'
-            }}
-        >
-            <a href={user?.html_url} target='_blank' rel='noreferrer'>
+    <Wrapper>
+        <Box style={BoxStyle}>
+            <Link href={user?.html_url} target='_blank' rel='noreferrer'>
                 <img
                     src={user?.avatar_url}
                     alt='avatar'
-                    style={{ height: '200px', width: '200px', borderRadius: '50%' }}
+                    style={{ height: '180px', width: '180px', borderRadius: '50%' }}
                 />
-            </a>
-            <div>
-                <Info>Username: {user?.login}</Info>
-                <Info>Followers: {user?.followers}</Info>
-                <Info>Following: {user?.following}</Info>
-                <Info>Repos: {user?.public_repos}</Info>
-            </div>
-        </div>
+            </Link>
+            <Box>
+                <Info variant='subtitle2'>Username: {user?.login}</Info>
+                <Info variant='subtitle2'>Followers: {user?.followers}</Info>
+                <Info variant='subtitle2'>Following: {user?.following}</Info>
+                <Info variant='subtitle2'>Repos: {user?.public_repos}</Info>
+            </Box>
+        </Box>
         <Divider variant='middle' orientation='vertical' flexItem />
         <Repos repos={repos} />
-    </NewBox>
+    </Wrapper>
 );
 
 export default Github;

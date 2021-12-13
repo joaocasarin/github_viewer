@@ -14,14 +14,10 @@
         "prepare": "husky install"
     },
     "dependencies": {
-        "@mui/icons-material": "^5.2.1",
         "@mui/material": "^5.2.3",
         "axios": "^0.24.0",
         "react": "^17.0.2",
         "react-dom": "^17.0.2",
-        "react-loader-spinner": "^4.0.0",
-        "react-router-dom": "^6.0.2",
-        "styled-components": "^5.3.3",
         "uuid": "^8.3.2"
     },
     "devDependencies": {
@@ -32,11 +28,10 @@
         "@babel/preset-react": "^7.16.0",
         "@babel/preset-typescript": "^7.16.0",
         "@babel/runtime": "^7.16.3",
-        "@emotion/react": "^11.7.0",
+        "@emotion/react": "^11.7.1",
         "@emotion/styled": "^11.6.0",
         "@types/react": "^17.0.37",
         "@types/react-dom": "^17.0.11",
-        "@types/styled-components": "^5.1.17",
         "@types/uuid": "^8.3.3",
         "@typescript-eslint/eslint-plugin": "^5.6.0",
         "@typescript-eslint/parser": "^5.6.0",
@@ -55,17 +50,16 @@
         "husky": "^7.0.4",
         "lint-staged": "^12.1.2",
         "prettier": "^2.5.1",
-        "react-is": "^17.0.2",
         "style-loader": "^3.3.1",
-        "typescript": "^4.5.2",
+        "typescript": "^4.5.3",
         "webpack": "^5.65.0",
         "webpack-cli": "^4.9.1",
         "webpack-dev-server": "^4.6.0"
     },
     "lint-staged": {
-        "*.{js,ts}": [
-            "eslint --cache *.{js,ts} --fix",
-            "prettier --config .prettierrc.js *.{ts,js,css} --write"
+        "*.{js,ts,jsx,tsx,css}": [
+            "eslint --cache *.{js,ts,jsx,tsx,css} --fix",
+            "prettier --config .prettierrc.js *.{js,ts,jsx,tsx,css} --write"
         ]
     }
 }

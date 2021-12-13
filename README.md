@@ -33,15 +33,14 @@ https://ghprofile.casarin.dev/
 
 -   [ ] Fix some UI glitches
 -   [ ] Improve code quality
+-   [ ] Use React Router to show repo details
 
 ## Technologies
 
 -   TypeScript
 -   React.js
 -   Material UI 5
--   Styled Components
 -   Axios
--   React Router (future)
 -   Webpack
 -   Babel
 

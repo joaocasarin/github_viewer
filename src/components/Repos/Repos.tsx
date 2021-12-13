@@ -1,32 +1,21 @@
 /* eslint-disable no-unsafe-optional-chaining */
-import { List, ListItem, Pagination, Link, styled } from '@mui/material';
 import React, { useState, ChangeEvent } from 'react';
+import { List, ListItem, Pagination } from '@mui/material';
 import { v4 as uuid } from 'uuid';
+import { NewLink, Wrapper } from './Repos.styles';
 import { UserRepo } from '../../interfaces/interfaces';
-
-const NewLink = styled(Link)(() => ({
-    fontFamily: 'Fira Sans',
-    color: '#373737',
-    fontWeight: 'bold',
-    transitionDuration: '0.3s',
-    transitionProperty: 'color',
-    transitionTimingFunction: 'ease-in-out',
-    '&:hover': {
-        color: '#65499c'
-    }
-}));
 
 const Repos = ({ repos }: { repos: UserRepo[] }) => {
     const itemsPerPage = 7;
     const pages = Math.ceil(repos.length / itemsPerPage);
     const [currentPage, setCurrentPage] = useState(1);
 
-    const handlePageChange = (event: ChangeEvent<unknown>, value: number) => {
+    const handlePageChange = (_event: ChangeEvent<unknown>, value: number) => {
         setCurrentPage(value);
     };
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+        <Wrapper>
             <List sx={{ overflow: 'clip' }}>
                 {repos
                     .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
@@ -53,7 +42,7 @@ const Repos = ({ repos }: { repos: UserRepo[] }) => {
                     color='secondary'
                 />
             )}
-        </div>
+        </Wrapper>
     );
 };
 
