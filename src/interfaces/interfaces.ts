@@ -1,14 +1,15 @@
-export interface RepoOwner {
+export interface User {
     login: string;
     avatar_url: string;
     html_url: string;
+    followers: number;
+    following: number;
+    public_repos: number;
 }
 
-export interface ResponseData {
+export interface UserRepo {
     name: string;
     full_name: string;
     html_url: string;
-    description: string;
     language: string;
-    owner: RepoOwner;
 }
