@@ -1,55 +1,52 @@
-import React, { SyntheticEvent, useState } from 'react';
-import { Button, TextField, Typography } from '@mui/material';
-import axios from '../../services/Api';
-import { ResponseData } from '../../interfaces/interfaces';
+import React from 'react';
+import { Box, BoxProps, Divider } from '@mui/material';
+import { styled as muiStyled } from '@mui/material/styles';
+import styled from 'styled-components';
+import { User, UserRepo } from '../../interfaces/interfaces';
 import Repos from '../Repos/Repos';
 
-const GithubUser = () => {
-    const [user, setUser] = useState<ResponseData[]>([]);
-    const [searchValue, setSearchValue] = useState('');
-    const [loading, setLoading] = useState(false);
+const NewBox = muiStyled(Box)<BoxProps>(() => ({
+    width: '100%',
+    height: '325px',
+    display: 'flex',
+    justifyContent: 'space-around'
+}));
 
-    const changeSearchValue = (event: SyntheticEvent) => {
-        event.preventDefault();
-        setSearchValue((event.target as HTMLInputElement).value);
-    };
+const Info = styled.p`
+    font-size: 1rem;
+    font-weight: bold;
+    color: #373737;
+    font-family: 'Fira Sans', sans-serif;
+    padding: 0.5rem;
+`;
 
-    const handleSearch = async () => {
-        setLoading(true);
-        try {
-            const { data }: { data: ResponseData[] } = await axios.get(
-                `/users/${searchValue}/repos`
-            );
-            setUser(data);
-        } catch (e) {
-            setUser([]);
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    return (
-        <>
-            <Typography variant='h6'>Github User Search</Typography>
-            <div>
-                <TextField
-                    variant='outlined'
-                    label='User'
-                    type='search'
-                    onChange={changeSearchValue}
+const Github = ({ user, repos }: { user: User | undefined; repos: UserRepo[] }) => (
+    <NewBox>
+        <div
+            style={{
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-around',
+                alignItems: 'center'
+            }}
+        >
+            <a href={user?.html_url} target='_blank' rel='noreferrer'>
+                <img
+                    src={user?.avatar_url}
+                    alt='avatar'
+                    style={{ height: '200px', width: '200px', borderRadius: '50%' }}
                 />
-                <Button
-                    disabled={!searchValue}
-                    variant='contained'
-                    onClick={() => handleSearch()}
-                    sx={{ marginLeft: '1rem', height: '100%' }}
-                >
-                    Search
-                </Button>
+            </a>
+            <div>
+                <Info>Username: {user?.login}</Info>
+                <Info>Followers: {user?.followers}</Info>
+                <Info>Following: {user?.following}</Info>
+                <Info>Repos: {user?.public_repos}</Info>
             </div>
-            <Repos user={user} loading={loading} />
-        </>
-    );
-};
+        </div>
+        <Divider variant='middle' orientation='vertical' flexItem />
+        <Repos repos={repos} />
+    </NewBox>
+);
 
-export default GithubUser;
+export default Github;
