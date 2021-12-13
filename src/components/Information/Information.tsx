@@ -1,8 +1,8 @@
 /* eslint-disable react/jsx-no-bind */
+import React, { ChangeEvent, FormEvent, useState } from 'react';
 import {
     TextField,
     Button,
-    ButtonProps,
     Divider,
     Dialog,
     DialogTitle,
@@ -11,27 +11,10 @@ import {
     DialogActions,
     CircularProgress
 } from '@mui/material';
-import { styled as muiStyled } from '@mui/material/styles';
-import React, { ChangeEvent, FormEvent, useState } from 'react';
-import styled from 'styled-components';
-import { User, UserRepo } from '../../interfaces/interfaces';
+import { Wrapper, Form, NewButton } from './Information.styles';
 import Github from '../Github/Github';
 import api from '../../services/Api';
-
-const NewButton = muiStyled(Button)<ButtonProps>(({ theme }) => ({
-    color: theme.palette.getContrastText('#9575cd'),
-    backgroundColor: '#9575cd',
-    '&:hover': {
-        backgroundColor: '#65499c'
-    },
-    marginLeft: '10px'
-}));
-
-const Form = styled.form`
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-`;
+import { User, UserRepo } from '../../interfaces/interfaces';
 
 const Information = () => {
     const [dialogOpen, setDialogOpen] = useState(false);
@@ -82,14 +65,7 @@ const Information = () => {
     }
 
     return (
-        <div
-            style={{
-                width: '100%',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center'
-            }}
-        >
+        <Wrapper>
             <Form onSubmit={requestData}>
                 <TextField
                     label='User'
@@ -114,9 +90,9 @@ const Information = () => {
                 </Dialog>
             </Form>
             <Divider variant='middle' sx={{ marginTop: '20px', marginBottom: '20px' }} />
+
             {showContent()}
-            {/* <Github user={user} repos={repos} /> */}
-        </div>
+        </Wrapper>
     );
 };
 
